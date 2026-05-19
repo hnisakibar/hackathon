@@ -1,9 +1,13 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
 from google.genai import types
+from dotenv import load_dotenv
 import json
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -17,7 +21,13 @@ app.add_middleware(
 )
 
 
-GEMINI_API_KEY = "***REMOVED***"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    raise ValueError(
+        "GEMINI_API_KEY bulunamadı. Lütfen .env dosyası oluşturup içine "
+        "GEMINI_API_KEY=your_key_here satırını ekleyin."
+    )
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
