@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Sayfa Metin ve Ekran Görüntüsü",
+  "version": "1.0.0",
+  "description": "Aktif sayfadaki metinleri toplar ve görünür alanın ekran görüntüsünü alır.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Metin topla ve ekran görüntüsü al"
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 320px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 15px;
+      background-color: #f8f9fa;
+    }
+    h2 { margin-top: 0; color: #333; font-size: 18px; }
+    button {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background-color: #0056b3; }
+    #result { margin-top: 15px; display: none; }
+    .score-box {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .danger { background-color: #f8d7da; color: #721c24; }
+    .safe { background-color: #d4edda; color: #155724; }
+    .summary-text { font-size: 14px; line-height: 1.4; color: #555; margin-bottom: 10px; }
+    .pattern-item {
+      background: white;
+      padding: 8px;
+      border-left: 4px solid #dc3545;
+      margin-bottom: 5px;
+      font-size: 12px;
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>AI Dark Pattern Detector</h2>
+  <button id="analyze-btn">Sanal Ajanı Çalıştır</button>
+
+  <div id="result">
+    <div id="score-container" class="score-box">Manipülasyon Skoru: %<span id="score">0</span></div>
+    <p id="summary" class="summary-text"></p>
+    <div id="patterns-list"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
