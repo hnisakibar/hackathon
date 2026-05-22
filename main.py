@@ -45,17 +45,37 @@ async def analyze_site(data: SiteData):
     ÖNEMLİ KURAL: Yazacağın 'summary' ve 'description' raporlarında ASLA "metin" kelimesini kullanma. 
     Kullanıcıya hitap ederken her zaman "Bu site...", "Sitede..." şeklinde 'site' kelimesini kullan.
 
-    Puanlama Kriterleri (Başlangıç puanın 0, maksimum 100):
-    1. FAKE SCARCITY / URGENCY (Yapay Azlık / Zaman Baskısı): "son 2 ürün", "tükeniyor", "kaçırma", "sayaçlar" vb. durumlar varsa -> 35 PUAN ekle.
-    2. SOCIAL PROOF / PEER PRESSURE (Sosyal Baskı): "X kişi şu an bakıyor", "en çok ziyaret edilen", "popüler ürün" vb. durumlar varsa -> 30 PUAN ekle.
-    3. DECEPTIVE PRICING (Yanıltıcı Fiyat/Kampanya): Sepette anlık indirim algısı vb. durumlar varsa -> 35 PUAN ekle.
+    PUANLAMA KURALLARI (Başlangıç puanı 0, maksimum 100):
+    
+    Her kategori için YOĞUNLUK seviyesine göre puan ver. Sadece "var/yok" değil, KAÇ TANE örnek bulduğuna bak.
+
+    1. FAKE SCARCITY / URGENCY (Yapay Azlık / Zaman Baskısı):
+       - Hiç yok: 0 puan
+       - 1-2 zayıf örnek (örn: sadece "stokta az kaldı"): 10 puan
+       - 3-5 orta seviye örnek (sayaç + "son ürünler" + "kaçırma"): 20 puan
+       - 6+ yoğun örnek (her yerde sayaç, agresif urgency dili): 35 puan
+    
+    2. SOCIAL PROOF / PEER PRESSURE (Sosyal Baskı):
+       - Hiç yok: 0 puan
+       - 1-2 zayıf örnek (sadece "popüler"): 8 puan
+       - 3-5 orta seviye örnek ("X kişi bakıyor" + "en çok satan"): 18 puan
+       - 6+ yoğun örnek (sürekli izleyici sayısı, sosyal baskı): 30 puan
+    
+    3. DECEPTIVE PRICING (Yanıltıcı Fiyat/Kampanya):
+       - Hiç yok: 0 puan
+       - 1-2 zayıf örnek (basit indirim): 10 puan
+       - 3-5 orta seviye örnek (üstü çizili fiyat + sahte indirim): 20 puan
+       - 6+ yoğun örnek (manipülatif fiyat oyunları): 35 puan
+
+    KRİTİK: Birden fazla örnek olsa bile, o kategorinin MAKSİMUM puanını aşma.
+    Her kategoride tespit ettiğin ÖRNEK SAYISINI patterns içinde belirt.
 
     Analiz sonucunu MUTLAKA sadece şu JSON formatında geri dön:
     {{
-        "manipulation_score": (Hesapladığın toplam puan),
+        "manipulation_score": (Hesapladığın toplam puan, 0-100 arası),
         "summary": "Kullanıcıya yönelik, içinde ASLA 'metin' kelimesi geçmeyen, doğrudan 'site' ifadesini kullanan uyarıcı ve net Türkçe bir özet cümle",
         "patterns": [
-            {{"pattern": "Bulduğun Tekniğin Adı", "description": "Siteden örnek göstererek, 'site' ifadesini kullanan detaylı Türkçe açıklama"}}
+            {{"pattern": "Bulduğun Tekniğin Adı", "description": "Siteden SOMUT ÖRNEKLER vererek (kaç tane bulduğunu da belirt), 'site' ifadesini kullanan detaylı Türkçe açıklama"}}
         ]
     }}
 
